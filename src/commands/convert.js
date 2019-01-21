@@ -63,7 +63,7 @@ class Convert {
       .round(decimals)
       .done();
 
-    return `The ${sensitivity}${inputUnit.name} is approximately ${outputSensitivity} in ${outputUnit.name}`;
+    return `With ${cpi} CPI the ${sensitivity}${inputUnit.name} is approximately ${outputSensitivity} in ${outputUnit.name}`;
   }
 
   convertToRev(from, to, sensitivity, cpi, decimals) {
@@ -89,7 +89,7 @@ class Convert {
       .round(decimals)
       .done();
 
-    return `The ${inputUnit.name} sensitivity ${sensitivity} is approximately ${measurement}${outputUnit.name}`;
+    return `With ${cpi} CPI the ${inputUnit.name} sensitivity ${sensitivity} is approximately ${measurement}${outputUnit.name}`;
   }
 
   exec(message) {
@@ -181,7 +181,7 @@ class Convert {
         'Example Usage:',
         '```sh\n' + this.name + ' --from fortnite-config --sens 0.02 --to cm/rev\n```',
         'Arguments/Flags:',
-        '```sh\n-h, --help     Show this help message\n-v, --version  Show my version number\n-c, --cpi      The target mouse\'s DPI\n-d, --decimals The number of decimal places, 0 - 15, to round the output to, defaults to 5\n-f, --from     The input "-s/--sens/--sensitivity" data type\n-s, --sens, --sensitivity  The sensitivity to be converted. Must be in the units specified in "-f/--from"\n-t, --to       The data type to convert the "-s/--sens/--sensitivity" to\n```',
+        '```sh\n-h, --help     Show this help message\n-v, --version  Show my version number\n-c, --cpi      The target mouse\'s DPI, defaults to 800\n-d, --decimals The number of decimal places, 0 - 15, to round the output to, defaults to 5\n-f, --from     The input "-s/--sens/--sensitivity" data type\n-s, --sens, --sensitivity  The sensitivity to be converted. Must be in the units specified in "-f/--from"\n-t, --to       The data type to convert the "-s/--sens/--sensitivity" to\n```',
         'Supported Sensitivity Types:',
         '```\n' +
           constants.units

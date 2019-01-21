@@ -13,7 +13,7 @@ A Discord bot designed to convert sensitivities across multiple games. Based on 
 ```sh
 -h, --help      Show this help message
 -v, --version   Show the running version number
--c, --cpi       The target mouses DPI
+-c, --cpi       The target mouses DPI. Defaults to 800
 -d, --decimals  The number of decimal places, between 0 - 15, to round the output to. Defaults to 5
 -f, --from      The input "-s/--sens/--sensitivity" data type
 -s, --sens, --sensitivity   The sensitivity to be converted. Must be in the units specified in "-f/--from"
