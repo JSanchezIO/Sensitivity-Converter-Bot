@@ -1,0 +1,36 @@
+{
+  "name": "sensitivity-converter-bot",
+  "private": true,
+  "main": "./src/index.js",
+  "version": "1.0.0",
+  "description": "A Discord bot designed to convert sensitivities across multiple games. Based on the magic from KovaaK's Sensitivity Matcher.",
+  "scripts": {
+    "lint": "eslint ./src/**/*.js"
+  },
+  "keywords": [
+    "discord",
+    "sensitivity",
+    "converter",
+    "quake",
+    "fortnite",
+    "csgo",
+    "counter",
+    "strike",
+    "global",
+    "offensive",
+    "discord",
+    "kovaak"
+  ],
+  "author": "Juan Sanchez <juan@prestigexp.com> (https://github.com/JSanchezIO/)",
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "discord.js": "^11.4.2",
+    "mathjs": "^5.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.0"
+  }
+}
