@@ -63,7 +63,7 @@ class Convert {
       .round(decimals)
       .done();
 
-    return `With ${cpi} CPI the ${sensitivity}${inputUnit.name} is approximately ${outputSensitivity} in ${outputUnit.name}`;
+    return `With ${cpi} CPI ${sensitivity}${inputUnit.name} is approximately ${outputSensitivity} in ${outputUnit.name}`;
   }
 
   convertToRev(from, to, sensitivity, cpi, decimals) {

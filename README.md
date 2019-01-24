@@ -22,6 +22,7 @@ A Discord bot designed to convert sensitivities across multiple games. Based on 
 
 # Supported Sensitivity Types
 - cm/rev
+- Counter Strike: Global Offensive (`cs` or `csgo`)
 - Fortnite Config (`fortnite` or `fortnite-config`)
 - Fortnite Slider (`fortnite-slider`)
 - in/rev

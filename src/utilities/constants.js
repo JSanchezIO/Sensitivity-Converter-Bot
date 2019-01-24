@@ -2,6 +2,11 @@ const math = require('mathjs');
 
 const units = [
   {
+    aliases: ['cs', 'csgo'],
+    name: 'CS:GO',
+    yaw: math.number(0.022)
+  },
+  {
     aliases: ['cm/rev'],
     name: 'cm/rev'
   },
