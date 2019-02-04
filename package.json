@@ -2,7 +2,7 @@
   "name": "sensitivity-converter-bot",
   "private": true,
   "main": "./dist/index.js",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A Discord bot designed to convert sensitivities across multiple games. Based on the magic from KovaaK's Sensitivity Matcher.",
   "scripts": {
     "build": "gulp build",

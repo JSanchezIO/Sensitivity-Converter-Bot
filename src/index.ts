@@ -25,16 +25,16 @@ client.on('message', message => {
     return;
   }
 
-  const actionFiles: string[] = readdirSync(resolve(__dirname, 'actions')).filter(file => file.includes('.ts'));
+  const actionFiles: string[] = readdirSync(resolve(__dirname, 'actions')).filter(file => file.includes('.js'));
 
   let result: IResult | undefined;
 
   for (const actionFile of actionFiles) {
-    const Action: any = require(`./actions/${actionFile}`);
+    const Action: any = require(`./actions/${actionFile}`).default;
     const action: IAction = createAction(Action, logger);
 
     if (command === `/${action.command}`) {
-      result = action.exec(request);
+      result = action.exec(request.replace(`/${action.command} `, ''));
       break;
     }
   }
@@ -45,7 +45,7 @@ client.on('message', message => {
 
   const prefix: string = `REQUEST: ${message.id}\n`;
 
-  if (result.deleteRequest) {
+  if (result.deleteRequest && message.deletable) {
     message
       .delete()
       .then(() => {
@@ -60,16 +60,33 @@ client.on('message', message => {
     return;
   }
 
-  const method = result.sendPrivately ? message.author.send : message.channel.send;
   const length: number = result.messages.length;
 
-  result.messages.forEach((msg, idx) => {
-    method(msg)
-      .then(() => {
-        logger.log(prefix + `Successfully sent message ${idx} of ${length}`);
-      })
-      .catch(() => {
-        logger.error(prefix + `Failed to send message ${idx} of ${length}`);
-      });
-  });
+  if (result.sendPrivately) {
+    result.messages.forEach((msg, idx) => {
+      message.author
+        .send(msg)
+        .then(() => {
+          logger.log(prefix + `Successfully sent message ${idx + 1} of ${length}`);
+        })
+        .catch(() => {
+          logger.error(prefix + `Failed to send message ${idx + 1} of ${length}`);
+        });
+    });
+  } else {
+    result.messages.forEach((msg, idx) => {
+      message.channel
+        .send(msg)
+        .then(() => {
+          logger.log(prefix + `Successfully sent message ${idx + 1} of ${length}`);
+        })
+        .catch(() => {
+          logger.error(prefix + `Failed to send message ${idx + 1} of ${length}`);
+        });
+    });
+  }
 });
+
+client.login(process.env.AUTH_TOKEN).then(() => {
+  logger.log('Online');
+}, logger.error);

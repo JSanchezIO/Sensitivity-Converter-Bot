@@ -3,7 +3,7 @@ import { chain, divide, MathType, multiply, round } from 'mathjs';
 import { IAction, IConvertArgs, ILogger, IMetric, IResult } from '../interfaces';
 import { metrics } from '../utilities';
 
-export class Convert implements IAction {
+export default class Convert implements IAction {
   public readonly command: string = 'convert-sens';
 
   private readonly parser: ArgumentParser;
@@ -27,7 +27,7 @@ export class Convert implements IAction {
       description:
         "A Discord bot designed to convert sensitivities across multiple games. Based on the magic from KovaaK's Sensitivity Matcher.",
       prog: this.command,
-      version: '1.0.0'
+      version: '1.2.0'
     });
 
     this.parser.addArgument(['-c', '--cpi'], {
@@ -101,7 +101,7 @@ export class Convert implements IAction {
       }
 
       if (args.units) {
-        result.messages.push('```\n' + `The following units are available: ${this.metricChoices}` + '\n```');
+        result.messages.push('```\n' + `The following units are available:\n${this.metricChoices}` + '\n```');
         return result;
       }
 
@@ -148,8 +148,6 @@ export class Convert implements IAction {
       if (err.message.includes(`${this.parser.prog}: error: ${this.parser.version}`)) {
         err.message = err.message.replace(': error: ', ' v');
       }
-
-      this.logger.warn(err.message);
 
       result.messages.push(err.message);
     }
