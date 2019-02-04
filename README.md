@@ -6,18 +6,20 @@ A Discord bot designed to convert sensitivities across multiple games. Based on 
 
 # Usage
 ```sh
-/convert-sens --from fortnite-config --sens 0.02 --to cm/rev
+/convert-sens 0.08 fortnite-slider overwatch
+/convert-sens 0.08 fortnite-slider cm/rev
+/convert-sens 0.08 fortnite-slider cm/rev --cpi 400
 ```
 
 # Arguments
 ```sh
--h, --help      Show this help message
--v, --version   Show the running version number
 -c, --cpi       The target mouses DPI. Defaults to 800
--d, --decimals  The number of decimal places, between 0 - 15, to round the output to. Defaults to 5
--f, --from      The input "-s/--sens/--sensitivity" data type
--s, --sens, --sensitivity   The sensitivity to be converted. Must be in the units specified in "-f/--from"
--t, --to        The data type to convert the "-s/--sens/--sensitivity" to
+-d, --decimals  The number of decimal places, between 0 - 15, to round the output to. Defaults to 5.
+-h, --help      Show this help message
+-p, --public    Denotes if the result should be displayed in the requesting channel or privately in a DM.
+-u, --units     Show the supported sensitivity types
+--usage         Show multiple examples
+-v, --version   Show the running version number
 ```
 
 # Supported Sensitivity Types

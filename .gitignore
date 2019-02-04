@@ -64,3 +64,6 @@ typings/
 /.vscode/
 
 \.DS_Store
+
+# output
+/dist/

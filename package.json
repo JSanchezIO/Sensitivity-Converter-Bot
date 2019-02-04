@@ -1,11 +1,12 @@
 {
   "name": "sensitivity-converter-bot",
   "private": true,
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "version": "1.0.0",
   "description": "A Discord bot designed to convert sensitivities across multiple games. Based on the magic from KovaaK's Sensitivity Matcher.",
   "scripts": {
-    "lint": "eslint ./src/**/*.js"
+    "build": "gulp build",
+    "lint": "tslint ./src/**/*.ts"
   },
   "keywords": [
     "discord",
@@ -24,13 +25,22 @@
   "author": "Juan Sanchez <juan@prestigexp.com> (https://github.com/JSanchezIO/)",
   "dependencies": {
     "argparse": "^1.0.10",
+    "chalk": "^2.4.2",
     "discord.js": "^11.4.2",
     "mathjs": "^5.4.1"
   },
   "devDependencies": {
-    "eslint": "^5.12.1",
-    "eslint-config-prettier": "^3.6.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.16.0"
+    "@types/argparse": "^1.0.35",
+    "@types/chalk": "^2.2.0",
+    "@types/mathjs": "^4.4.5",
+    "@types/node": "^10.12.18",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-typescript": "^5.0.0",
+    "mkdirp": "^0.5.1",
+    "prettier": "^1.16.0",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.4"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": "src",
+    "lib": ["es6"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "target": "es2015"
+  }
+}

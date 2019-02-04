@@ -1,0 +1,8 @@
+{
+    "$schema": "http://json.schemastore.org/tslint",
+    "defaultSeverity": "error",
+    "extends": ["tslint:latest", "tslint-config-prettier"],
+    "rules": {
+        "no-implicit-dependencies": [true, ["interfaces", "utilities"]]
+    }
+}
