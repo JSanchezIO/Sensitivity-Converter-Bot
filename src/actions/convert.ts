@@ -93,6 +93,7 @@ export default class Convert implements IAction {
     try {
       const args: IConvertArgs = this.parser.parseArgs(request.split(/ +/));
 
+      result.deleteRequest = !args.public;
       result.sendPrivately = !args.public;
 
       if (args.help) {
