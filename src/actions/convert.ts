@@ -1,9 +1,11 @@
 import { ArgumentParser } from 'argparse';
-import { chain, divide, MathType, multiply, round } from 'mathjs';
+import { chain, divide, isNumeric, MathType, multiply, number, round } from 'mathjs';
 import { IAction, IConvertArgs, ILogger, IMetric, IResult } from '../interfaces';
 import { metrics } from '../utilities';
 
 export default class Convert implements IAction {
+  public readonly aliases: string[] = ['convert', 'sens', 'sens-pub'];
+
   public readonly command: string = 'convert-sens';
 
   private readonly parser: ArgumentParser;
@@ -73,13 +75,11 @@ export default class Convert implements IAction {
     });
 
     this.parser.addArgument('from', {
-      choices: this.metricChoices,
-      help: "The input data's unit type."
+      help: "The input data's unit type or custom yaw."
     });
 
     this.parser.addArgument('to', {
-      choices: this.metricChoices,
-      help: "The output data's unit type."
+      help: "The output data's unit type or custom yaw."
     });
   }
 
@@ -90,11 +90,15 @@ export default class Convert implements IAction {
       sendPrivately: true
     };
 
+    const command: string = request.substr(1, request.indexOf(' ') - 1);
+
+    request = request.replace(`/${command} `, '');
+
     try {
       const args: IConvertArgs = this.parser.parseArgs(request.split(/ +/));
 
-      result.deleteRequest = !args.public;
-      result.sendPrivately = !args.public;
+      result.deleteRequest = !(args.public || command === 'sens-pub');
+      result.sendPrivately = result.deleteRequest;
 
       if (args.help) {
         result.messages.push('```\n' + this.parser.formatHelp() + '\n```');
@@ -207,7 +211,16 @@ export default class Convert implements IAction {
     const metric: IMetric | undefined = metrics.find(m => m.aliases.some(alias => alias.toLowerCase() === name));
 
     if (metric === undefined || metric === null) {
-      throw new Error(`For some reason the "${param}" unit type, "${name}", couldn't be found`);
+      // @ts-ignore
+      if (isNaN(name)) {
+        throw new Error(`For some reason the "${param}" unit type, "${name}", couldn't be found`);
+      }
+
+      return {
+        aliases: [],
+        name: `Custom Yaw (${name})`,
+        yaw: number(name)
+      };
     }
 
     return metric;

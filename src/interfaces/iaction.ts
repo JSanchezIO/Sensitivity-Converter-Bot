@@ -5,6 +5,11 @@ import { IResult } from "./iresult";
  */
 export interface IAction {
     /**
+     * The aliases, if any, of the command the action can respond to.
+     */
+    readonly aliases: string[];
+
+    /**
      * The name of the command the action can respond to.
      */
     readonly command: string;

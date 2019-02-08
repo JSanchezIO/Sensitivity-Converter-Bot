@@ -33,8 +33,8 @@ client.on('message', message => {
     const Action: any = require(`./actions/${actionFile}`).default;
     const action: IAction = createAction(Action, logger);
 
-    if (command === `/${action.command}`) {
-      result = action.exec(request.replace(`/${action.command} `, ''));
+    if (command === `/${action.command}` || action.aliases.some(alias => command === `/${alias}`)) {
+      result = action.exec(request);
       break;
     }
   }
@@ -43,7 +43,7 @@ client.on('message', message => {
     return;
   }
 
-  const prefix: string = `REQUEST: ${message.id}\n`;
+  const prefix = `REQUEST: ${message.id}\n`;
 
   if (result.deleteRequest && message.deletable) {
     message

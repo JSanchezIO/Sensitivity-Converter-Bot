@@ -3,6 +3,6 @@
     "defaultSeverity": "error",
     "extends": ["tslint:latest", "tslint-config-prettier"],
     "rules": {
-        "no-implicit-dependencies": [true, ["interfaces", "utilities"]]
+        "no-inferrable-types": true
     }
 }

@@ -3,6 +3,11 @@ import { IMetric } from '../interfaces';
 
 const metrics: IMetric[] = [
   {
+    aliases: ['apex', 'apex-legends'],
+    name: 'Apex Legends',
+    yaw: number(0.022)
+  },
+  {
     aliases: ['cs', 'csgo'],
     name: 'CS:GO',
     yaw: number(0.022)
@@ -13,7 +18,7 @@ const metrics: IMetric[] = [
     yaw: number(0)
   },
   {
-    aliases: ['fortnite', 'fortnite-config'],
+    aliases: ['fn', 'fortnite', 'fortnite-config'],
     name: 'Fortnite Config',
     yaw: number(2.222)
   },

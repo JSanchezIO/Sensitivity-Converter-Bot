@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const del = require('del');
 const gulp = require('gulp');
 const mkdirp = require('mkdirp');
@@ -17,7 +18,7 @@ const move = () => {
 };
 
 const purge = cb => {
-  del([tsProject.options.outDir + '/src', tsProject.options.outDir + "/gulpfile.js"]).then(() => {
+  del([tsProject.options.outDir + '/src', tsProject.options.outDir + '/gulpfile.js']).then(() => {
     cb();
   });
 };
