@@ -7,8 +7,11 @@ A Discord bot designed to convert sensitivities across multiple games. Based on 
 # Usage
 ```sh
 /convert-sens 0.08 fortnite-slider overwatch
+/sens 0.08 fortnite-slider overwatch
 /convert-sens 0.08 fortnite-slider cm/rev
+/sens-public 0.08 fortnite-slider cm/rev
 /convert-sens 0.08 fortnite-slider cm/rev --cpi 400
+/convert 0.08 fortnite-slider cm/rev --cpi 400
 ```
 
 # Arguments
@@ -23,6 +26,7 @@ A Discord bot designed to convert sensitivities across multiple games. Based on 
 ```
 
 # Supported Sensitivity Types
+- Apex Legends (`apex` or `apex-legends`)
 - cm/rev
 - Counter Strike: Global Offensive (`cs` or `csgo`)
 - Fortnite Config (`fortnite` or `fortnite-config`)
