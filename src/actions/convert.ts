@@ -1,5 +1,5 @@
 import { ArgumentParser } from 'argparse';
-import { chain, divide, isNumeric, MathType, multiply, number, round } from 'mathjs';
+import { chain, divide, MathJsChain, MathType, multiply, number } from 'mathjs';
 import { IAction, IConvertArgs, ILogger, IMetric, IResult } from '../interfaces';
 import { metrics } from '../utilities';
 
@@ -115,8 +115,8 @@ export default class Convert implements IAction {
         return result;
       }
 
-      const isFromRev: boolean = args.from.includes('rev');
-      const isToRev: boolean = args.to.includes('rev');
+      const isFromRev: boolean = args.from.includes('rev') || args.from.includes('deg');
+      const isToRev: boolean = args.to.includes('rev') || args.to.includes('deg');
 
       if (args.from === args.to) {
         result.messages.push("The input data's unit type is already in the output data's unit type");
@@ -124,12 +124,7 @@ export default class Convert implements IAction {
       }
 
       if (isFromRev && isToRev) {
-        const outputSensitivity: MathType = round(
-          args.to.includes('cm') ? multiply(args.sensitivity, 2.54) : divide(args.sensitivity, 2.54),
-          args.decimals
-        );
-
-        result.messages.push(`The ${args.sensitivity}${args.from} is approximately ${outputSensitivity}${args.to}`);
+        result.messages.push(this.convertBetweenRev(args.from, args.sensitivity, args.to, args.cpi, args.decimals));
         return result;
       }
 
@@ -178,12 +173,73 @@ export default class Convert implements IAction {
     return `The ${fromMetric.name} sensitivity ${sensitivity} is approximately ${outputSensitivity} in ${toMetric.name}`;
   }
 
+  private convertBetweenRev(from: string, sensitivity: number, to: string, cpi: number, decimals: number): string {
+    const fromMetric: IMetric = this.findMetric(from, 'from');
+    const toMetric: IMetric = this.findMetric(to, 'to');
+
+    let outputSensitivity: MathJsChain = chain(sensitivity);
+
+    switch (fromMetric.name) {
+      case 'cm/rev':
+        outputSensitivity = outputSensitivity.divide(2.54);
+        break;
+      case 'deg/mm':
+        outputSensitivity = chain(360)
+          .divide(outputSensitivity.done())
+          .divide(10)
+          .divide(2.54);
+        break;
+      default:
+        break;
+    }
+
+    switch (toMetric.name) {
+      case 'cm/rev':
+        outputSensitivity = outputSensitivity.multiply(2.54);
+        break;
+      case 'deg/mm':
+        outputSensitivity = chain(360).divide(
+          outputSensitivity
+            .multiply(2.54)
+            .multiply(10)
+            .done()
+        );
+        break;
+      default:
+        break;
+    }
+
+    outputSensitivity = outputSensitivity.round(decimals).done();
+
+    return `The ${sensitivity}${fromMetric.name} is approximately ${outputSensitivity}${toMetric.name}`;
+  }
+
   private convertFromRev(from: string, sensitivity: number, to: string, cpi: number, decimals: number): string {
     const fromMetric: IMetric = this.findMetric(from, 'from');
     const toMetric: IMetric = this.findMetric(to, 'to');
 
+    let inputSens = sensitivity;
+
+    let multiplier: number;
+
+    switch (fromMetric.name) {
+      case 'cm/rev':
+        multiplier = 2.54;
+        break;
+      case 'deg/mm':
+        inputSens = chain(360)
+          .divide(inputSens)
+          .divide(10)
+          .done();
+        multiplier = 2.54;
+        break;
+      default:
+        multiplier = 1;
+        break;
+    }
+
     const outputSensitivity = chain(360)
-      .divide(multiply(divide(sensitivity, fromMetric.name.includes('cm') ? 2.54 : 1), cpi))
+      .divide(multiply(divide(inputSens, multiplier), cpi))
       .divide(toMetric.yaw)
       .round(decimals)
       .done();
@@ -194,13 +250,35 @@ export default class Convert implements IAction {
   private convertToRev(from: string, sensitivity: number, to: string, cpi: number, decimals: number): string {
     const fromMetric: IMetric = this.findMetric(from, 'from');
     const toMetric: IMetric = this.findMetric(to, 'to');
-
     const trueSensitivity: MathType = multiply(fromMetric.yaw, sensitivity);
 
-    const measurement = chain(360)
+    let multiplier: number;
+
+    switch (toMetric.name) {
+      case 'cm/rev':
+        multiplier = 2.54;
+        break;
+      case 'deg/mm':
+        multiplier = 20.54;
+        break;
+      default:
+        multiplier = 1;
+        break;
+    }
+
+    let measurement = chain(360)
       .divide(cpi)
       .divide(trueSensitivity)
-      .multiply(toMetric.name === 'cm/rev' ? 2.54 : 1)
+      .multiply(multiplier)
+      .done();
+
+    if (multiplier === 20.54) {
+      measurement = chain(360)
+        .divide(measurement)
+        .done();
+    }
+
+    measurement = chain(measurement)
       .round(decimals)
       .done();
 

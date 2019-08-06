@@ -18,6 +18,11 @@ const metrics: IMetric[] = [
     yaw: number(0)
   },
   {
+    aliases: ['deg/mm'],
+    name: 'deg/mm',
+    yaw: number(0)
+  },
+  {
     aliases: ['fn', 'fortnite', 'fortnite-config'],
     name: 'Fortnite Config',
     yaw: number(2.222)

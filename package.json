@@ -22,25 +22,25 @@
     "discord",
     "kovaak"
   ],
-  "author": "Juan Sanchez <juan@prestigexp.com> (https://github.com/JSanchezIO/)",
+  "author": "Juan Sanchez <jsanchez@suwaye.com> (https://github.com/JSanchezIO/)",
   "dependencies": {
     "argparse": "^1.0.10",
     "chalk": "^2.4.2",
-    "discord.js": "^11.4.2",
-    "mathjs": "^5.4.1"
+    "discord.js": "^11.5.1",
+    "mathjs": "^6.0.4"
   },
   "devDependencies": {
-    "@types/argparse": "^1.0.35",
+    "@types/argparse": "^1.0.36",
     "@types/chalk": "^2.2.0",
-    "@types/mathjs": "^4.4.5",
-    "@types/node": "^10.12.18",
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-typescript": "^5.0.0",
+    "@types/mathjs": "^6.0.1",
+    "@types/node": "^12.6.9",
+    "del": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^5.0.1",
     "mkdirp": "^0.5.1",
-    "prettier": "^1.16.0",
-    "tslint": "^5.12.1",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.4"
+    "prettier": "^1.18.2",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.3"
   }
 }
