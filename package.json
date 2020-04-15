@@ -4,10 +4,6 @@
   "main": "./dist/index.js",
   "version": "1.2.0",
   "description": "A Discord bot designed to convert sensitivities across multiple games. Based on the magic from KovaaK's Sensitivity Matcher.",
-  "scripts": {
-    "build": "gulp build",
-    "lint": "tslint ./src/**/*.ts"
-  },
   "keywords": [
     "discord",
     "sensitivity",
@@ -22,25 +18,46 @@
     "discord",
     "kovaak"
   ],
-  "author": "Juan Sanchez <jsanchez@suwaye.com> (https://github.com/JSanchezIO/)",
-  "dependencies": {
-    "argparse": "^1.0.10",
-    "chalk": "^2.4.2",
-    "discord.js": "^11.5.1",
-    "mathjs": "^6.0.4"
+  "author": "Juan Sanchez <juanesanchez5@gmail.com> (https://github.com/JSanchezIO/)",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --ignore-path .eslintignore \"**/*.@(js|ts)\"",
+    "lint:fix": "lint-staged",
+    "test": "jest",
+    "test:ci": "jest --ci --coverage",
+    "validate": "npm-run-all --aggregate-output validate:types lint:fix -p lint test",
+    "validate:types": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/argparse": "^1.0.36",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@types/argparse": "^1.0.38",
     "@types/chalk": "^2.2.0",
-    "@types/mathjs": "^6.0.1",
-    "@types/node": "^12.6.9",
-    "del": "^5.0.0",
-    "gulp": "^4.0.2",
-    "gulp-typescript": "^5.0.1",
-    "mkdirp": "^0.5.1",
-    "prettier": "^1.18.2",
-    "tslint": "^5.18.0",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.5.3"
+    "@types/jest": "^25.2.1",
+    "@types/mathjs": "^6.0.5",
+    "@types/node": "^13.11.1",
+    "@types/ws": "^7.2.4",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "commitizen": "^4.0.4",
+    "cz-conventional-changelog": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.5",
+    "jest": "^25.3.0",
+    "lint-staged": "^10.1.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.4",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "chalk": "^4.0.0",
+    "discord.js": "^12.1.1",
+    "mathjs": "^6.6.3"
   }
 }

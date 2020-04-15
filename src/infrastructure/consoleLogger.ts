@@ -1,9 +1,9 @@
-// tslint:disable:no-console
+/* eslint-disable class-methods-use-this, no-console */
 
-import chalk from "chalk";
-import { ILogger } from '../interfaces';
+import chalk from 'chalk';
+import { ILogger } from '../domain/abstractions';
 
-export class Logger implements ILogger {
+class ConsoleLogger implements ILogger {
   public error(message: any, ...optionalParams: any[]) {
     console.error(chalk.red(message), ...optionalParams);
   }
@@ -20,3 +20,5 @@ export class Logger implements ILogger {
     console.warn(chalk.yellow(message), ...optionalParams);
   }
 }
+
+export default ConsoleLogger;

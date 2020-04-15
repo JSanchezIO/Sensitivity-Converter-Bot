@@ -43,3 +43,4 @@ A Discord bot designed to convert sensitivities across multiple games. Based on 
 - Rainbow Six Siege (`rainbow-six`, `r6`, `r-6`, `rsix`, `r-six`, `siege`)
 - Reflex (`reflex`)
 - Source (`source`)
+- Valorant (`valorant`)

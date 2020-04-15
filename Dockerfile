@@ -1,9 +1,9 @@
-FROM node:10.9-alpine AS build-env
+FROM node:12 AS build-env
 WORKDIR /app
 COPY . .
 RUN npm i && npm run build
 
-FROM node:10.9-alpine
+FROM node:12-alpine
 WORKDIR /app
 COPY --from=build-env /app/dist ./dist
 COPY --from=build-env /app/package.json /app/package-lock.json ./

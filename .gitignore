@@ -67,3 +67,6 @@ typings/
 
 # output
 /dist/
+
+# test coverage
+/coverage/
