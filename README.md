@@ -1,6 +1,11 @@
+<img alt='Sensitivity Converter Bot' src='https://cdn.discordapp.com/app-icons/536633635869163520/438f01abfb4213aa43bd245aae4d4d36.png?size=256' style='display: block; margin-left: auto; margin-right: auto;'>
+
 # Sensitivity Converter Bot
 
 A Discord bot designed to convert sensitivities across multiple games. Based on the magic from KovaaK's Sensitivity Matcher.
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # Installation
 

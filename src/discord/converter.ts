@@ -8,6 +8,7 @@ import Measurement from '../domain/measurements/measurement';
 class Converter {
   private _supportedGameSettings = [
     GameSettings.apexLegends(),
+    GameSettings.callOfDutyModernWarfare(),
     GameSettings.counterStrikeGlobalOffensive(),
     GameSettings.fortniteConfig(),
     GameSettings.fortniteSlider(),

@@ -34,7 +34,7 @@ describe('Parser', () => {
     const result = target.execute(input);
 
     expect(result.messages[0].replace(/\n/g, '').replace(/ +/g, ' ')).toBe(
-      '```The following units are available:apex,apex-legends,cs,csgo,fn,fortnite,fortnite-config,fortnite-slider,overwatch,ow,quake,rainbow-six,r6,r-6,rsix,r-six,siege,reflex,source,valorant,cm/rev,deg/mm,in/rev```'
+      '```The following units are available:apex,apex-legends,cod,mw,cs,csgo,fn,fortnite,fortnite-config,fortnite-slider,overwatch,ow,quake,rainbow-six,r6,r-6,rsix,r-six,siege,reflex,source,valorant,cm/rev,deg/mm,in/rev```'
     );
   });
 
