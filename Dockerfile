@@ -10,4 +10,4 @@ COPY --from=build-env /app/package.json /app/package-lock.json ./
 ENV NPM_CONFIG_LOGLEVEL=error
 ENV NODE_ENV=production
 RUN npm ci
-CMD ["node", "."]
+CMD ["node", "./dist/src/index.js"]

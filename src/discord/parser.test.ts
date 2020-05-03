@@ -2,12 +2,15 @@ import Parser from './parser';
 
 describe('Parser', () => {
   it.each([
+    '/convert-sens',
+    '/sens ',
+    '/sens-pub',
     '/convert-sens -h',
     '/convert-sens --help',
     '/sens -h',
     '/sens --help',
-    '/sens-public -h',
-    '/sens-public --help',
+    '/sens-pub -h',
+    '/sens-pub --help',
   ])('outputs help information', (input: string) => {
     const target = new Parser();
 
@@ -23,8 +26,8 @@ describe('Parser', () => {
     '/convert-sens --units',
     '/sens -u',
     '/sens --units',
-    '/sens-public -u',
-    '/sens-public --units',
+    '/sens-pub -u',
+    '/sens-pub --units',
   ])('outputs units information', (input: string) => {
     const target = new Parser();
 
@@ -35,7 +38,7 @@ describe('Parser', () => {
     );
   });
 
-  it.each(['/convert-sens --usage', '/sens --usage', '/sens-public --usage'])(
+  it.each(['/convert-sens --usage', '/sens --usage', '/sens-pub --usage'])(
     'outputs usage information',
     (input: string) => {
       const target = new Parser();
@@ -48,7 +51,7 @@ describe('Parser', () => {
     }
   );
 
-  it.each(['/convert-sens 55 cm/rev cs', '/sens 55 cm/rev cs', '/sens-public 55 cm/rev cs'])(
+  it.each(['/convert-sens 55 cm/rev cs', '/sens 55 cm/rev cs', '/sens-pub 55 cm/rev cs'])(
     'outputs conversion',
     (input: string) => {
       const target = new Parser();

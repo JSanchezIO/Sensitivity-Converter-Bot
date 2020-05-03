@@ -69,7 +69,7 @@ type ParserArgs = {
 };
 
 class Parser {
-  private readonly _aliases = ['conver', 'convert-sens', 'sens', 'sens-pub'];
+  private readonly _aliases = ['convert', 'convert-sens', 'sens', 'sens-pub'];
 
   private readonly _converter: Converter;
 
@@ -173,13 +173,17 @@ class Parser {
       sendPrivately: true,
     };
 
-    const command: string = request.substr(1, request.indexOf(' ') - 1);
-    const cleanRequest = request.replace(`/${command} `, '');
+    const regex = new RegExp(`^/(${this._aliases.join('(?!-)|')}) ?`, 'g');
+    let cleanRequest = request.replace(regex, '');
+
+    if (!cleanRequest) {
+      cleanRequest = '-h';
+    }
 
     try {
       const args: ParserArgs = this._parser.parseArgs(cleanRequest.split(/ +/));
 
-      result.deleteRequest = !(args.public || command === 'sens-pub');
+      result.deleteRequest = !(args.public || /^\/sens-pub ?/.test(request));
       result.sendPrivately = result.deleteRequest;
 
       if (args.help) {

@@ -27,17 +27,41 @@ describe('GameSettings', () => {
     });
   });
 
+  describe('Call of Duty: Modern Warfare', () => {
+    it('creates game settings', () => {
+      const result = GameSettings.callOfDutyModernWarfare();
+
+      expect(result.aliases).toEqual(['cod', 'mw']);
+      expect(result.name).toBe('Call of Duty: Modern Warfare');
+    });
+
+    it('converts to true sensitivity', () => {
+      const target = GameSettings.callOfDutyModernWarfare();
+
+      const actual = target.convertToTrueSensitivity(1);
+
+      expect(actual).toBe(0.0066);
+    });
+
+    it('converts from true sensitivity', () => {
+      const target = GameSettings.callOfDutyModernWarfare();
+
+      const actual = target.convertFromTrueSensitivity(0.0066);
+
+      expect(actual).toBe(1);
+    });
+  });
+
   describe('CS:GO', () => {
     it('creates game settings', () => {
       const result = GameSettings.counterStrikeGlobalOffensive();
 
       expect(result.aliases).toEqual(['cs', 'csgo']);
       expect(result.name).toBe('CS:GO');
-      expect(result.convertToTrueSensitivity(1)).toBe(0.022);
     });
 
     it('converts to true sensitivity', () => {
-      const target = GameSettings.apexLegends();
+      const target = GameSettings.counterStrikeGlobalOffensive();
 
       const actual = target.convertToTrueSensitivity(1);
 
@@ -45,7 +69,7 @@ describe('GameSettings', () => {
     });
 
     it('converts from true sensitivity', () => {
-      const target = GameSettings.apexLegends();
+      const target = GameSettings.counterStrikeGlobalOffensive();
 
       const actual = target.convertFromTrueSensitivity(0.022);
 

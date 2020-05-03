@@ -65,6 +65,15 @@ class GameSettings {
     return Result.ok(gameSettings);
   }
 
+  public static callOfDutyModernWarfare() {
+    const result = GameSettings.create('Call of Duty: Modern Warfare', 0.0066);
+    const gameSettings = result.value as GameSettings;
+
+    gameSettings.setAliases(['cod', 'mw']);
+
+    return gameSettings;
+  }
+
   public static counterStrikeGlobalOffensive() {
     const result = GameSettings.create('CS:GO', 0.022);
     const gameSettings = result.value as GameSettings;
